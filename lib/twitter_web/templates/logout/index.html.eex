@@ -1,0 +1,3 @@
+<%=
+    "Users" |> Phoenix.HTML.Link.link(to: PfuWeb.Router.Helpers.user_path(@conn, :new))
+ %>
