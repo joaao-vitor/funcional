@@ -4,22 +4,20 @@ view = PfuWeb.UserView.render("user.html", user: user)
 -->
 <div id="users">
     <div class="row">
-        <div class="column column-10">
             <div>
-                <img src="https://www.w3schools.com/w3css/img_avatar<%= rem(@user.id, 5)+1 %>.png" height="32" alt="<%= @user.username %>">
+                <img class="user-img" src="https://www.w3schools.com/w3css/img_avatar<%= rem(@user.id, 5)+1 %>.png" height="64" width="64" alt="<%= @user.username %>">
             </div>
-        </div>
         <div class="column column-90">
             <b>ID: <%= @user.id %></b><br/>
-            <b>FIRST_NAME: </b> <%= first_name(@user) %> <br/>
-            <b>FULL_NAME: </b> <%= @user.name %>
+            <b>USERNAME: </b> <%= @user.username %><br/>
+            <!--<b>FIRST_NAME: </b> <%= first_name(@user) %> <br/>
+            <b>FULL_NAME: </b> <%= @user.name %> -->
         </div>
     </div>
 
     <div class="row">
         <div class="column flipar">
-            <b>USERNAME: </b> <%= @user.username %><br/>
-            <b>HASH: </b> <%= @user.password_hash %>
+            <!--<b>HASH: </b> <%= @user.password_hash %> -->
         </div>
     </div>
 </div>

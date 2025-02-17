@@ -1,8 +1,16 @@
 defmodule TwitterWeb.PageLive do
+  alias Twitter.User
+  alias Twitter.Repo
   use TwitterWeb, :live_view
 
   @impl true
-  def mount(_params, _session, socket) do
+  def mount(_params, session, socket) do
+    user_id =Map.get(session, "user_id")
+    user = if user_id do
+      Repo.get(User, user_id)
+    end
+    socket = assign(socket, :user, user)
+
     {:ok, assign(socket, query: "", results: %{})}
   end
 

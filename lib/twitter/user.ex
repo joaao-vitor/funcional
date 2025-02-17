@@ -22,6 +22,7 @@ defmodule Twitter.User do
     |> put_hash()
   end
 
+
   def put_hash(changeset) do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: %{password: pass}} ->

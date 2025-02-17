@@ -1,5 +1,6 @@
-<h1>Listing Posts</h1>
-
+<h1 class="timeline-title"><i class="fa fa-comment"></i>Timeline</h1>
+<div class="timeline-container">
+<button class="btn btn-primary btn-new-post"><%= live_patch "New Post", to: Routes.post_index_path(@socket, :new) %></button>
 <%= if @live_action in [:new, :edit] do %>
   <%= live_modal @socket, TwitterWeb.PostLive.FormComponent,
     id: @post.id || :new,
@@ -14,4 +15,4 @@
       <%= live_component @socket, TwitterWeb.PostLive.PostComponent, id: post.id, post: post, user_id: @user_id %>
     <% end %>
 </div>
-<span><%= live_patch "New Post", to: Routes.post_index_path(@socket, :new) %></span>
+</div>

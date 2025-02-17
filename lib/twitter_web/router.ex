@@ -11,20 +11,29 @@ defmodule TwitterWeb.Router do
     plug TwitterWeb.Auth, repo: Twitter.Repo
   end
 
+  pipeline :authenticated do
+    plug :authenticate_user # Verifica se o usuário está autenticado
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
-
   scope "/", TwitterWeb do
-    pipe_through :browser
+    pipe_through [:browser, :authenticated]
 
-    live "/", PageLive, :index
     live "/posts", PostLive.Index, :index
     live "/posts/new", PostLive.Index, :new
     live "/posts/:id/edit", PostLive.Index, :edit
 
     live "/posts/:id", PostLive.Show, :show
     live "/posts/:id/show/edit", PostLive.Show, :edit
+  end
+
+
+  scope "/", TwitterWeb do
+    pipe_through :browser
+
+    live "/", PageLive, :index
 
     resources "/users", UserController, only: [:index, :show, :new, :create, :edit, :delete, :update]
     get "/logout", LogoutController, :index

@@ -8,27 +8,52 @@
     <%= live_title_tag assigns[:page_title] || "Twitter", suffix: " · Phoenix Framework" %>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+<script src="https://kit.fontawesome.com/f64a7cac4d.js" crossorigin="anonymous"></script>
+
   </head>
   <body>
-    <header>
-      <div class="container">
-            <!-- <a href="/"><i class="fa fa-home"> Home</i></a> | -->
-            <a href="/posts"><i class="fa fa-comments"> Discussão do dia</i></a> |
+  <div class="page">
+    <aside class="sidebar">
+      <ul>
+      <li>
+            <a href="/"><i class="fa fa-home"></i>Início</a>
+
+      </li>
+            <%= if @current_user do %>
+            <li>
+            <a href="/posts"><i class="fa fa-comments"></i>Timeline</a>
+            </li>
+            <% end %>
             <%= if !@current_user do %>
-              <a href="/sessions/new"><i class="fa fa-key"> Enter</i></a> |
-              <i class="fa fa-registered"> <%= link "Register", to: Routes.user_path(@conn, :new) %></i> |
+            <li>
+              <a href="/sessions/new"><i class="fa fa-key"></i>Login</a>
+            </li>
+            <li>
+              <i class="fa fa-registered"></i>
+              <%= link "Cadastrar-se", to: Routes.user_path(@conn, :new) %>
+            </li>
             <% else %>
-              <a href="/users"><i class="fa fa-users"> Users</i></a> |
-              <a href="/manage/profile"><i class="fa fa-id-card"> <%= @current_user.username %></i></a> |
-              <%= Phoenix.HTML.Link.link("EXIT("<>@current_user.username<>") | ", to: "/logout") %>
+            <li>
+              <a href="/users"><i class="fa fa-users"></i>Usuários</a>
+            </li>
+            <li>
+                <a href="/users/<%= @current_user.id %>"><i class="fa fa-id-card"></i><%= @current_user.username %></a>            </li>
+            <li>
+                <a href="/logout"><i class="fa fa-right-from-bracket"></i> Log out</a>
+              <!--<%= Phoenix.HTML.Link.link("EXIT("<>@current_user.username<>") | ", to: "/logout") %>
+              -->
+            </li>
             <% end %>
             <!-- <i class="far fa-sad-cry"> <a href="https://hexdocs.pm/phoenix/overview.html">Docs</a></i> | -->
-            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+            <!-- <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
               <%= link "LiveBoard", to: Routes.live_dashboard_path(@conn, :home) %>
-            <% end %>
+            <% end %> -->
         <!-- <a href="/" class="phx-logo"> <img src="<%= Routes.static_path(@conn, "/images/logo.png") %>" alt="Home" width="58" height="64" /> </a> -->
-      </div>
-    </header>
+      </ul>
+    </aside>
+    <main class="main">
     <%= @inner_content %>
+    </main>
+    </div>
   </body>
 </html>

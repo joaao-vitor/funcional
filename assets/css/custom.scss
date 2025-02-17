@@ -3,6 +3,105 @@
 // }
 $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 
+
+* {
+    font-family: 'Inter', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.page {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+
+.sidebar {
+    padding: 1rem;
+    padding-top: 10rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    background-color: #e7f6ff;
+
+    ul {
+        list-style: none;
+        li {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: background-color 0.5s;
+        }
+
+        li:hover {
+            background-color: #ffffff;
+        }
+
+        a {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            text-decoration: none;
+            color: black;
+            font-family: 'Poppins';
+            font-weight: 500;
+        }
+    }
+}
+
+.main {
+    padding: 5rem;
+    min-height: 100vh;
+    height: 100%;
+}
+
+h1 {
+    font-family: 'Poppins', sans-serif;
+}
+
+.timeline-title {
+    font-weight: 700;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+
+    .fa {
+        color: rgb(0, 110, 255);
+    }
+}
+.timeline-container{
+    display: flex;
+    flex-direction: column;
+}
+.btn-new-post {
+    align-self: flex-end;
+    a {
+        color: #FFF;
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 10pt;
+    }
+}
+.home-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+#users {
+    padding: 5rem;
+    border: 1px solid #00000054;
+    border-radius: 1rem;
+    .user-img {
+        width: 64px;
+        height: 64px;
+        object-fit: cover;
+        border-radius: 0.5rem;
+    }
+}
 .post {
     background: #fff;
     margin: 15px 0;
@@ -20,16 +119,45 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
         display: flex;
         justify-content: center;
         justify-items: center;
+
         a {
             color: black;
+
+            .fa {
+
+                transition: all 0.25s;
+            }
         }
+
+        .like {
+            color: red;
+        }
+
+        a:hover>.fa {
+            scale: 1.5;
+        }
+
+        .retweet {
+            color: rgb(2, 135, 145);
+        }
+
     }
 
     .delete-edit {
         display: flex;
         gap: 2rem;
-        a {
+
+        a,
+        action-not-link {
             color: rgb(0, 144, 201) !important;
+        }
+
+        .delete {
+            color: red;
+        }
+
+        .edit {
+            color: rgb(199, 169, 0);
         }
     }
 }
