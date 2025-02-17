@@ -1,6 +1,8 @@
 defmodule TwitterWeb.PostLive.FormComponent do
   use TwitterWeb, :live_component
 
+  alias Twitter.User
+  alias Twitter.Repo
   alias Twitter.Timeline
 
 
@@ -41,6 +43,9 @@ defmodule TwitterWeb.PostLive.FormComponent do
   end
 
   defp save_post(socket, :new, post_params) do
+    IO.inspect(socket.assigns)
+    user = Repo.get!(User, socket.assigns.user_id)
+    post_params = Map.put(post_params, "username", user.username)
     case Timeline.create_post(post_params) do
       {:ok, _post} ->
         {:noreply,

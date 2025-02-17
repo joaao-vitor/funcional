@@ -1,5 +1,7 @@
 defmodule TwitterWeb.UserSocket do
   use Phoenix.Socket
+  alias TwitterWeb.Auth
+
 
   ## Channels
   # channel "room:*", TwitterWeb.RoomChannel
@@ -16,8 +18,14 @@ defmodule TwitterWeb.UserSocket do
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
   @impl true
-  def connect(_params, socket, _connect_info) do
-    {:ok, socket}
+  def connect(%{"user_id" => user_id}, socket, _connect_info) do
+    case Auth.get_user_by_id(user_id) do
+      {:ok, user} ->
+        {:ok, assign(socket, :current_user, user)}
+
+      _ ->
+        :error
+    end
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:

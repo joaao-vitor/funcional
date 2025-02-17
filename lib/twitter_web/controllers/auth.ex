@@ -52,4 +52,13 @@ defmodule TwitterWeb.Auth do
   def logout(conn) do
     conn |> configure_session(drop: true)
   end
+
+  def get_user_by_id(user_id) do
+    case user_id do
+      nil -> {:error, :unauthorized}
+      user_id ->
+        user = Repo.get(User, user_id)
+        if user, do: {:ok, user}, else: {:error, :not_found}
+    end
+  end
 end

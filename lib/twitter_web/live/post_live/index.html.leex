@@ -6,11 +6,12 @@
     title: @page_title,
     action: @live_action,
     post: @post,
+    user_id: @user_id,
     return_to: Routes.post_index_path(@socket, :index) %>
 <% end %>
 <div id="posts" phx-update="prepend">
     <%= for post <- @posts do %>
-      <%= live_component @socket, TwitterWeb.PostLive.PostComponent, id: post.id, post: post %>
+      <%= live_component @socket, TwitterWeb.PostLive.PostComponent, id: post.id, post: post, user_id: @user_id %>
     <% end %>
 </div>
 <span><%= live_patch "New Post", to: Routes.post_index_path(@socket, :new) %></span>
